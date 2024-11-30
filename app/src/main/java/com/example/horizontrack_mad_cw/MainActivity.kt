@@ -10,8 +10,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_bmi_cal)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.BMI)) { v, insets ->
+
+//        setContentView(R.layout.activity_bmi_cal)
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.BMI)) { v, insets ->
+            setContentView(R.layout.activity_dash_board)
+            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.dashboard)) { v, insets ->
+
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
