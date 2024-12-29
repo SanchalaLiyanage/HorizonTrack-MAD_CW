@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- BMI Input Field -->
+    <TextInputLayout
+        android:id="@+id/bmiInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextInputEditText
+            android:id="@+id/bmiEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter BMI"
+            android:inputType="numberDecimal"
+            android:importantForAccessibility="yes"
+            android:labelFor="@id/bmiInputLayout"
+            android:maxLines="1"
+            android:padding="16dp"/>
+    </TextInputLayout>
+
+    <!-- Generate Diet Plan Button -->
+    <Button
+        android:id="@+id/generateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Generate Diet Plan"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/bmiInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Diet Plan Output Text -->
+    <TextView
+        android:id="@+id/dietPlanTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Your diet plan will appear here."
+        android:layout_marginTop="32dp"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/generateButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
