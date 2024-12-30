@@ -24,20 +24,17 @@
             android:textColor="#000000" />
 
         <!-- Reset Button -->
-
-        <!-- Gender Selection -->
         <Button
             android:id="@+id/btnReset"
             android:layout_width="31dp"
             android:layout_height="25dp"
             android:layout_gravity="end"
             android:layout_marginTop="8dp"
-            android:background="@drawable/reset_btn"
+            android:background="@drawable/reset_btn" />
 
-
-            />
-
+        <!-- Gender Selection -->
         <LinearLayout
+            android:id="@+id/llGenderSelection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -46,12 +43,10 @@
             android:layout_gravity="center_horizontal">
 
             <!-- Male Card -->
-
-            <!-- Female Card -->
             <LinearLayout
+                android:id="@+id/llMaleCard"
                 android:layout_width="141dp"
                 android:layout_height="178dp"
-
                 android:layout_marginEnd="8dp"
                 android:background="#607D8B"
                 android:gravity="center"
@@ -60,11 +55,13 @@
                 android:layout_marginLeft="100dp">
 
                 <ImageView
+                    android:id="@+id/ivMaleIcon"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/male_btn" />
 
                 <TextView
+                    android:id="@+id/tvMaleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -74,10 +71,11 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <!-- Female Card -->
             <LinearLayout
+                android:id="@+id/llFemaleCard"
                 android:layout_width="142dp"
                 android:layout_height="177dp"
-
                 android:layout_marginStart="8dp"
                 android:background="#195395"
                 android:gravity="center"
@@ -85,11 +83,13 @@
                 android:padding="8dp">
 
                 <ImageView
+                    android:id="@+id/ivFemaleIcon"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/female_btn" />
 
                 <TextView
+                    android:id="@+id/tvFemaleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -102,6 +102,7 @@
 
         <!-- Input Section -->
         <LinearLayout
+            android:id="@+id/llInputSection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -112,12 +113,14 @@
 
             <!-- Height Input -->
             <LinearLayout
+                android:id="@+id/llHeightInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="12dp">
 
                 <TextView
+                    android:id="@+id/tvHeightLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Height (cm):"
@@ -139,12 +142,14 @@
 
             <!-- Weight Input -->
             <LinearLayout
+                android:id="@+id/llWeightInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="12dp">
 
                 <TextView
+                    android:id="@+id/tvWeightLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Weight (kg):"
@@ -166,11 +171,13 @@
 
             <!-- Age Input -->
             <LinearLayout
+                android:id="@+id/llAgeInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvAgeLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Age (Years):"

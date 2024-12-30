@@ -11,8 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        setContentView(R.layout.actiivity_diet_generating)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.BMI)) { v, insets ->
+        setContentView(R.layout.activity_diet_planning)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.tvTitle)) { v, insets ->
 //            setContentView(R.layout.activity_dash_board)
 //            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.dashboard)) { v, insets ->
 
