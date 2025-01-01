@@ -5,23 +5,24 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal|center_vertical"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/white"
     tools:context=".MainActivity">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/profile"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/profile" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -61,8 +62,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
             android:background="@color/lightBlue"
+            android:orientation="vertical"
             android:padding="16dp">
 
             <TextView
@@ -85,11 +86,11 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:orientation="vertical"
             android:background="@color/lightBlue"
-            android:padding="16dp"
-            android:layout_marginStart="8dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -113,8 +114,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:orientation="vertical"
         android:background="@color/lightBlue"
+        android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
@@ -129,15 +130,15 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            android:gravity="bottom">
+            android:gravity="bottom"
+            android:orientation="horizontal">
             <!-- space for Steps chart  -->
         </LinearLayout>
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="20dp"
@@ -166,31 +167,37 @@
                 android:layout_height="wrap_content"
                 android:text="1. Monday  6000 steps"
                 android:textColor="@color/gray" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="2. Tuesday  7000 steps"
                 android:textColor="@color/gray" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="3. Wednesday  8000 steps"
                 android:textColor="@color/gray" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="4. Thursday  7500 steps"
                 android:textColor="@color/gray" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="5. Friday  6000 steps"
                 android:textColor="@color/gray" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="6. Saturday  9000 steps"
                 android:textColor="@color/gray" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -210,10 +217,21 @@
             android:text="View All"
             android:textColor="@color/gray"
             android:textSize="14sp" />
+
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <include
-        layout="@layout/activity_bottomnavigation" />
+        <Button
+            android:id="@+id/track_begin_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Start Tracker" />
+    </LinearLayout>
+
 
 </LinearLayout>

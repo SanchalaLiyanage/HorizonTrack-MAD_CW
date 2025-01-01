@@ -4,87 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".MapActivity">
+    tools:context=".FitnessActivity">
 
-
+    <!-- Top LinearLayout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
+        android:background="@color/white"
         android:gravity="center_vertical"
-        android:background="@color/white">
-
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/app_logo"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/logo"
+            android:layout_marginEnd="8dp"
             android:contentDescription="App Logo"
-            android:layout_marginEnd="8dp" />
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/route_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Running Route"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif-bold" />
-
-            <TextView
-                android:id="@+id/time_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Time"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <!-- Route Icon -->
-        <ImageView
-            android:id="@+id/route_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/track"
-            android:contentDescription="Route Icon" />
+            android:src="@drawable/logo" />
     </LinearLayout>
 
-    <!-- Map Section: Integrates Google Maps -->
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <!-- MapView that fills remaining space -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:layout_marginTop="16dp" />
 
+    <!-- Bottom LinearLayout -->
     <LinearLayout
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="10dp">
 
-
         <LinearLayout
             android:id="@+id/capturelayout"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:layout_gravity="fill_horizontal"
             android:background="@color/white"
+            android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:padding="8dp"
-            android:gravity="end">
+            android:scrollbarAlwaysDrawHorizontalTrack="true">
 
             <ImageView
                 android:id="@+id/camera"
@@ -92,7 +61,13 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="8dp"
                 android:contentDescription="Camera Icon"
-                android:src="@drawable/camera" />
+                android:src="@drawable/icons8_camera" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/journal"
@@ -100,20 +75,17 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="8dp"
                 android:contentDescription="Journal Icon"
-                android:src="@drawable/journalpic" />
+                android:src="@drawable/articles_journal_svgrepo_com" />
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/running_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Start"
+            android:text="START"
             android:textColor="@color/black"
             android:textSize="28sp" />
-        <!--        android:fontFamily="sans-serif-bold"-->
-
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -148,7 +120,6 @@
                 android:textColor="@color/black"
                 android:textSize="14sp" />
         </LinearLayout>
-
 
         <Button
             android:id="@+id/pause_button"
