@@ -2,4 +2,21 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="light_blue">#FFADD8E6</color> <!-- Light Blue -->
+    <color name="sky_blue">#FF87CEEB</color>   <!-- Sky Blue -->
+    <color name="steel_blue">#FF4682B4</color> <!-- Steel Blue -->
+    <color name="dodger_blue">#FF1E90FF</color> <!-- Dodger Blue -->
+    <color name="medium_blue">#FF0000CD</color> <!-- Medium Blue -->
+    <color name="royal_blue">#FF4169E1</color> <!-- Royal Blue -->
+    <color name="blue">#FF0000FF</color>       <!-- Blue -->
+    <color name="deep_sky_blue">#FF00BFFF</color> <!-- Deep Sky Blue -->
+    <color name="cornflower_blue">#FF6495ED</color> <!-- Cornflower Blue -->
+    <color name="navy_blue">#FF000080</color> <!-- Navy Blue -->
+    <color name="midnight_blue">#FF191970</color> <!-- Midnight Blue -->
+    <color name="slate_blue">#FF6A5ACD</color> <!-- Slate Blue -->
+    <color name="dark_blue">#FF00008B</color> <!-- Dark Blue -->
+    <color name="powder_blue">#FFB0E0E6</color> <!-- Powder Blue -->
+    <color name="cyan_blue">#FF00FFFF</color> <!-- Cyan Blue -->
+
 </resources>

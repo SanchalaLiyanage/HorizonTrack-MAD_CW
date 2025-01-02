@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -45,4 +46,18 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Core libraries
+    implementation (libs.androidx.core.ktx.v1120)
+    implementation (libs.androidx.appcompat)
+    implementation (libs.material.v1100)
+
+    // RecyclerView
+    implementation (libs.androidx.recyclerview)
+
+    // Image loading (optional but helpful for handling images efficiently)
+    implementation (libs.picasso)
+
+    // Kotlin standard library
+    implementation (libs.kotlin.stdlib)
 }
