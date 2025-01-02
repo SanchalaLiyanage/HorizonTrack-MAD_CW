@@ -19,5 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HorizonTrack-MAD_CW"
+rootProject.name = "app4"
 include(":app")
+ 
