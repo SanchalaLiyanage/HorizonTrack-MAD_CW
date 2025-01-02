@@ -1,4 +1,4 @@
-package com.example.horizontrack_mad_cw
+package com.example.mad_horizontracking
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

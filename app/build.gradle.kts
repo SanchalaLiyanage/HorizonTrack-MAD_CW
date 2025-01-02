@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.horizontrack_mad_cw"
-    compileSdk = 34
+    namespace = "com.example.mad_horizontracking"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.horizontrack_mad_cw"
+        applicationId = "com.example.mad_horizontracking"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -45,4 +45,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.cardview)
+    implementation (libs.play.services.auth)
+
+
+
 }
