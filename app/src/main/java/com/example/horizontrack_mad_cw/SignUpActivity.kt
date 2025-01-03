@@ -55,7 +55,13 @@ class SignUpActivity : AppCompatActivity() {
 
             if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
-            } else if (password != confirmPassword) {
+            }
+            // Check if email ends with @gmail.com
+            if (!email.endsWith("@gmail.com")) {
+                Toast.makeText(this, "Please enter a valid Gmail address", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            else if (password != confirmPassword) {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             } else {
                 // Navigate to Dashboard
