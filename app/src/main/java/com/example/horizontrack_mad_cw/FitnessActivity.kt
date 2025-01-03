@@ -45,7 +45,7 @@ class FitnessActivity : AppCompatActivity(), MapListener {
     lateinit var controller: IMapController
     lateinit var mMyLocationOverlay: MyLocationNewOverlay
     private lateinit var polyline: Polyline
-    private var summaryModel = SummaryModel();
+    private var summaryModel = SummaryModel()
     private lateinit var marker: Marker
 
     private lateinit var totalDistanceText: TextView
@@ -56,37 +56,46 @@ class FitnessActivity : AppCompatActivity(), MapListener {
     private val handler = Handler(Looper.getMainLooper())
     private var elapsedTime: Long = 0L
     private var startTime: Long = 0L
-    private var isRunning : Boolean = true;
-    private lateinit var pauseButton: Button;
+    private var isRunning: Boolean = true
+    private lateinit var pauseButton: Button
 
     private val locationHandler = Handler(Looper.getMainLooper())
     private val locationUpdateRunnable = object : Runnable {
+        var mockLatitude = 0.0
+        var mockLongitude = 0.0
+        var firstTime = true
+        var initialized = false
         override fun run() {
             mMyLocationOverlay.myLocation?.let { location ->
 
 
                 // TODO: COMMENT WHEN USING REAL [MOCK]
-                var mockLatitude = location.latitude
-                var mockLongitude = location.longitude
+                if (firstTime) {
+                    mockLongitude = location.longitude
+                    mockLatitude = location.latitude
+                    firstTime = false
+                }
                 val random = Random()
-                val randomLatitudeChange = (random.nextDouble() * 0.0005 - 0.00025)
-                val randomLongitudeChange = (random.nextDouble() * 0.0005 - 0.00025)
+                val randomLatitudeChange = (random.nextDouble() * 0.0001 - 0.00005)
+                val randomLongitudeChange = (random.nextDouble() * 0.0001 - 0.00005)
                 mockLatitude += randomLatitudeChange
                 mockLongitude += randomLongitudeChange
                 val location = GeoPoint(mockLatitude, mockLongitude)
 
 
-
-                val updatedTime = SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(Date())
-                Toast.makeText(
-                    this@FitnessActivity,
-                    "Location updated at: $updatedTime",
-                    Toast.LENGTH_SHORT
-                ).show()
+                if (!initialized) {
+                    val updatedTime =
+                        SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(Date())
+                    Toast.makeText(
+                        this@FitnessActivity,
+                        "Location updated at: $updatedTime",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    initialized=true
+                }
                 controller.setZoom(18.0)
                 controller.setCenter(location)
-
-                if(isRunning) {
+                if (isRunning) {
                     summaryModel.addLocation(
                         LocationModel(
                             LocalDateTime.now(),
@@ -102,7 +111,7 @@ class FitnessActivity : AppCompatActivity(), MapListener {
                 }
             }
 
-            locationHandler.postDelayed(this, 5000)
+            locationHandler.postDelayed(this, 1000)
         }
     }
 
@@ -132,14 +141,14 @@ class FitnessActivity : AppCompatActivity(), MapListener {
         mMap.addMapListener(this)
 
         polyline = Polyline()
-        polyline.setColor(Color.RED)
+        polyline.color = Color.RED
         polyline.width = 5f
         mMap.overlays.add(polyline)
 
         marker = Marker(mMap)
         marker.position = defaultLocation
         marker.title = "Me"
-        marker.setIcon(resources.getDrawable(R.drawable.ic_run_48__1_))
+        marker.icon = resources.getDrawable(R.drawable.ic_run_48__1_)
         mMap.overlays.add(marker)
 
         checkLocationServices()
@@ -156,9 +165,9 @@ class FitnessActivity : AppCompatActivity(), MapListener {
         pauseButton.text = "STOP"
 
         pauseButton.setOnClickListener {
-            if(pauseButton.text=="STOP") {
+            if (pauseButton.text == "STOP") {
                 stopStopwatch()
-            }else{
+            } else {
                 saveSummary()
             }
         }
@@ -168,9 +177,12 @@ class FitnessActivity : AppCompatActivity(), MapListener {
     private fun saveSummary() {
         Toast.makeText(
             this@FitnessActivity,
-            "Saving To DB",
+            "Saving To DB : Started",
             Toast.LENGTH_SHORT
         ).show()
+
+
+
     }
 
     private fun startStopwatch() {
@@ -179,13 +191,13 @@ class FitnessActivity : AppCompatActivity(), MapListener {
     }
 
     private fun stopStopwatch() {
-        isRunning=false
+        isRunning = false
         pauseButton.text = "SAVE SUMMARY"
     }
 
     private val updateTimerRunnable = object : Runnable {
         override fun run() {
-            if(isRunning) {
+            if (isRunning) {
                 val currentTime = System.currentTimeMillis()
                 elapsedTime = currentTime - startTime
                 val seconds = (elapsedTime / 1000) % 60
@@ -275,8 +287,8 @@ class FitnessActivity : AppCompatActivity(), MapListener {
     }
 
     override fun onScroll(event: ScrollEvent?): Boolean {
-        Log.e("TAG", "onScroll: lat ${event?.source?.getMapCenter()?.latitude}")
-        Log.e("TAG", "onScroll: lon ${event?.source?.getMapCenter()?.longitude}")
+        Log.e("TAG", "onScroll: lat ${event?.source?.mapCenter?.latitude}")
+        Log.e("TAG", "onScroll: lon ${event?.source?.mapCenter?.longitude}")
         return true
     }
 
