@@ -1,4 +1,4 @@
-package com.example.mad_horizontracking
+package com.example.horizontrack_mad_cw
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +13,7 @@ import com.google.android.gms.common.api.ApiException
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var googleSignInClient: GoogleSignInClient
-
+    //test commit 2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)

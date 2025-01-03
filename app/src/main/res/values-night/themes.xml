@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.MAD_horizonTracking" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.HorizonTrackMAD_CW" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
 

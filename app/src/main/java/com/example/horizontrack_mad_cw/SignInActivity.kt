@@ -1,4 +1,4 @@
-package com.example.mad_horizontracking
+package com.example.horizontrack_mad_cw
 
 import android.content.Intent
 import android.os.Bundle

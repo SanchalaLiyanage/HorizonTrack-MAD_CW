@@ -9,12 +9,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MAD_horizonTracking"
+        android:theme="@style/Theme.HorizonTrackMAD_CW"
         tools:targetApi="31">
 
         <!-- LandingPageActivity as the launcher activity -->
         <activity
-            android:name="com.example.mad_horizontracking.LandingPageActivity"
+            android:name="com.example.horizontrack_mad_cw.LandingPageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,23 +24,23 @@
 
         <!-- SignUpActivity Declaration -->
         <activity
-            android:name="com.example.mad_horizontracking.SignUpActivity"
+            android:name="com.example.horizontrack_mad_cw.SignUpActivity"
             android:exported="true"
             />
 
         <!-- SignInActivity Declaration -->
         <activity
-            android:name="com.example.mad_horizontracking.SignInActivity"
+            android:name="com.example.horizontrack_mad_cw.SignInActivity"
             android:exported="true" />
 
         <!-- DashboardActivity Declaration -->
         <activity
-            android:name="com.example.mad_horizontracking.DashboardActivity"
+            android:name="com.example.horizontrack_mad_cw.DashboardActivity"
             android:exported="true" />
 
         <!-- MainActivity (if needed for later navigation) -->
         <activity
-            android:name="com.example.mad_horizontracking.MainActivity"
+            android:name="com.example.horizontrack_mad_cw.MainActivity"
             android:exported="true" />
     </application>
 </manifest>

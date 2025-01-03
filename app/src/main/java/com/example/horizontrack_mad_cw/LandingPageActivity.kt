@@ -1,11 +1,11 @@
-package com.example.mad_horizontracking // Replace with your actual package name
+package com.example.horizontrack_mad_cw// Replace with your actual package name
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mad_horizontracking.R
+import com.example.horizontrack_mad_cw.R
 
 
 class LandingPageActivity : AppCompatActivity() {

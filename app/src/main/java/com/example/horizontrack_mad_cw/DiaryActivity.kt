@@ -1,4 +1,4 @@
-package com.example.mad_horizontracking
+package com.example.horizontrack_mad_cw
 
 class DiaryActivity {
 }

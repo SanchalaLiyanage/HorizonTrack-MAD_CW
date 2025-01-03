@@ -1,14 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
-    namespace = "com.example.mad_horizontracking"
+    namespace = "com.example.horizontrack_mad_cw"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.mad_horizontracking"
+        applicationId = "com.example.horizontrack_mad_cw"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -42,13 +43,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation ("com.google.android.gms:play-services-auth:20.2.0")
-
-
-
 }
-
