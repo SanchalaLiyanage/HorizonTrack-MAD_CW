@@ -7,12 +7,22 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import com.google.firebase.auth.FirebaseAuth
 
 class DashboardActivity : AppCompatActivity() {
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)  // Ensure this matches your layout file
+
+        mAuth = FirebaseAuth.getInstance()
+        if (mAuth.currentUser == null) {
+            // User is not signed in
+            startActivity(Intent(this, SignInActivity::class.java))
+            finish()
+            return
+        }
 
         // Back Button functionality
         val backIcon: ImageView = findViewById(R.id.backIcon) // Use findViewById directly for activities
@@ -21,7 +31,7 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         // Get the user's name from Intent or SharedPreferences
-        val userName = intent.getStringExtra("USER_NAME") ?: "User"
+        val userName = mAuth.currentUser!!.displayName
 
         // Set welcome message
         val welcomeTextView: TextView = findViewById(R.id.welcomeTextView)

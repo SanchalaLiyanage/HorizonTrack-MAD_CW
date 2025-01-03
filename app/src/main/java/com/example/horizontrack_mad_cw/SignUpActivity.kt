@@ -9,19 +9,24 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.AuthResult
 
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var googleSignInClient: GoogleSignInClient
-    //test commit 2
+    private lateinit var mAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        // Back Button functionality
-        val backIcon: ImageView = findViewById(R.id.backIcon) // Ensure this ID matches the one in your XML
+        mAuth = FirebaseAuth.getInstance()
+
+        val backIcon: ImageView = findViewById(R.id.backIcon)
         backIcon.setOnClickListener {
-            onBackPressed() // Go back to the previous page
+            onBackPressed() // go back to the previous page
         }
 
         // Initialize views
@@ -34,18 +39,24 @@ class SignUpActivity : AppCompatActivity() {
         val tvSignIn: TextView = findViewById(R.id.tv_sign_in)
 
         // Configure Google Sign-In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id)) // Replace with your Web Client ID
+        val gsoptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
+        googleSignInClient = GoogleSignIn.getClient(this, gsoptions)
 
-        // Handle Google Sign-In button click
+        // Google Sign-In button click
         btnSignInGoogle.setOnClickListener {
+            val currentUser = mAuth.currentUser
+            if (currentUser != null) {
+                mAuth.signOut() // Log out the user
+            }
+
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, 1001) // Request code for Google Sign-In
         }
 
+        // Handle Email/Password SIGN UP button click
         // Handle SIGN UP button click
         btnSignUp.setOnClickListener {
             val name = nameField.text.toString()
@@ -64,16 +75,35 @@ class SignUpActivity : AppCompatActivity() {
             else if (password != confirmPassword) {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             } else {
-                // Navigate to Dashboard
-                val intent = Intent(this, DashboardActivity::class.java)
-                startActivity(intent)
-                finish()
+                // Log out current user if signed in
+                val currentUser = mAuth.currentUser
+                if (currentUser != null) {
+                    mAuth.signOut() // Log out the user
+                }
+
+                // Create new account
+                mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            // Account created successfully
+                            val user = mAuth.currentUser
+                            Toast.makeText(this, "Account created successfully for ${user?.email}", Toast.LENGTH_SHORT).show()
+
+                            // Navigate to Dashboard
+                            val intent = Intent(this, DashboardActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            // If sign-up fails, display a message to the user
+                            Toast.makeText(this, "Sign-up failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
             }
         }
 
+
         // Handle SIGN IN link click (Navigate to Sign In Activity)
         tvSignIn.setOnClickListener {
-            // Start SignInActivity
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
@@ -83,20 +113,31 @@ class SignUpActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 1001) { // Match request code
+        if (requestCode == 1001) { // Google Sign-In request code
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
+                val account = task.getResult(ApiException::class.java)
 
                 if (account != null) {
-                    // Successfully signed in
-                    val email = account.email // Get the email address
-                    Toast.makeText(this, "Welcome, $email", Toast.LENGTH_SHORT).show()
+                    // Google Sign-In was successful, authenticate with Firebase
+                    mAuth = FirebaseAuth.getInstance()
 
-                    // Navigate to Dashboard
-                    val intent = Intent(this, DashboardActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                    mAuth.signInWithCredential(credential)
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                // Successfully signed in with Google
+                                val user = mAuth.currentUser
+                                Toast.makeText(this, "Welcome, ${user?.email}", Toast.LENGTH_SHORT).show()
+
+                                // Navigate to Dashboard
+                                val intent = Intent(this, DashboardActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(this, "Google Sign-In failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                 }
             } catch (e: ApiException) {
                 Toast.makeText(this, "Google Sign-In failed: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -104,4 +145,3 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 }
-

@@ -39,8 +39,8 @@
             android:exported="true" />
 
         <!-- MainActivity (if needed for later navigation) -->
-        <activity
-            android:name="com.example.horizontrack_mad_cw.MainActivity"
-            android:exported="true" />
+<!--        <activity-->
+<!--            android:name="com.example.horizontrack_mad_cw.MainActivity"-->
+<!--            android:exported="true" />-->
     </application>
 </manifest>
