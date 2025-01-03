@@ -12,7 +12,12 @@
           "package_name": "com.example.horizontrack_mad_cw"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "182422023213-qk47k8evn3ddp24olfoo7t3hktgjn57h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyARWzckyJ-ysQt59LzZwyECbfmdFwv8YYg"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182422023213-qk47k8evn3ddp24olfoo7t3hktgjn57h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
