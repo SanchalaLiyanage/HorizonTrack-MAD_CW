@@ -45,9 +45,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.androidx.cardview)
-    implementation (libs.play.services.auth)
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation ("com.google.android.gms:play-services-auth:20.2.0")
 
 
 
 }
+

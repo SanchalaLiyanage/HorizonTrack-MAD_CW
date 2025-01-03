@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <!-- Back Button at the top-left corner -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,8 +54,10 @@
             android:layout_height="50dp"
             android:hint="Name"
             android:backgroundTint="@color/gray"
+            android:textColorHint="@color/gray"
             android:padding="12dp"
             android:textSize="16sp"
+            android:textColor="@color/black"
             android:layout_marginBottom="12dp" />
 
 
@@ -65,8 +67,10 @@
             android:layout_height="50dp"
             android:hint="Email"
             android:backgroundTint="@color/gray"
+            android:textColorHint="@color/gray"
             android:padding="12dp"
             android:textSize="16sp"
+            android:textColor="@color/black"
             android:layout_marginBottom="12dp" />
 
 
@@ -76,8 +80,10 @@
             android:layout_height="50dp"
             android:hint="Password"
             android:backgroundTint="@color/gray"
+            android:textColorHint="@color/gray"
             android:padding="12dp"
             android:textSize="16sp"
+            android:textColor="@color/black"
             android:layout_marginBottom="12dp" />
 
 
@@ -87,8 +93,10 @@
             android:layout_height="50dp"
             android:hint="Confirm Password"
             android:backgroundTint="@color/gray"
+            android:textColorHint="@color/gray"
             android:padding="12dp"
             android:textSize="16sp"
+            android:textColor="@color/black"
             android:layout_marginBottom="16dp" />
 
 
@@ -118,31 +126,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@drawable/button_background"
-        android:gravity="center_vertical"
-        android:padding="12dp">
-
-        <!-- Google Logo -->
-        <ImageView
-            android:layout_marginLeft="50dp"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/google"
-            android:contentDescription="Google Logo" />
-
-        <!-- Text -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:gravity="center_vertical"
-            android:text="Continue with Google"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            />
-    </LinearLayout>
+            android:padding="12dp">
 
 
-    <TextView
+            <ImageView
+                android:layout_marginLeft="50dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/google"
+                android:contentDescription="Google Logo" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:gravity="center_vertical"
+                android:text="Continue with Google"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                />
+        </LinearLayout>
+
+
+        <TextView
             android:id="@+id/tv_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -152,7 +160,6 @@
             android:textColor="@color/dark_blue"
             android:textSize="14sp"
             android:gravity="center" />
-
 
 
 
