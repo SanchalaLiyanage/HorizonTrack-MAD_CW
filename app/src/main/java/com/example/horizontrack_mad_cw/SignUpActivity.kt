@@ -2,16 +2,20 @@ package com.example.horizontrack_mad_cw
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.horizontrack_mad_cw.models.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.firestore.firestore
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -87,6 +91,20 @@ class SignUpActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             // Account created successfully
                             val user = mAuth.currentUser
+
+                            //save user data in firestore
+                            val newUserWithData: User = User(name, email)
+                            val db = Firebase.firestore
+
+                            db.collection("user").document(user!!.uid)
+                                .set(newUserWithData)
+                                .addOnSuccessListener {
+                                    Log.d("SignUpActivity", "User data saved successfully")
+                                }
+                                .addOnFailureListener { e ->
+                                    Log.e("SignUpActivity", "Error saving user data: $e")
+                                }
+
                             Toast.makeText(this, "Account created successfully for ${user?.email}", Toast.LENGTH_SHORT).show()
 
                             // Navigate to Dashboard
@@ -122,12 +140,39 @@ class SignUpActivity : AppCompatActivity() {
                     // Google Sign-In was successful, authenticate with Firebase
                     mAuth = FirebaseAuth.getInstance()
 
+
+                    val newAccountid = account.id!!
+                    val name = account.displayName
+                    val email = account.email
+
+                    if (name != null && email != null) {
+                        //save user data in firestore
+                        val newUserWithData: User = User(name, email)
+                        val db = Firebase.firestore
+
+                        //check if alredy in fire store else add
+                        db.collection("user").document(newAccountid)
+                            .get()
+                            .addOnSuccessListener { document ->
+                                if (!document.exists()) { //if not in firestore then add new user
+                                    db.collection("user").document(newAccountid)
+                                        .set(newUserWithData)
+                                        .addOnSuccessListener {
+                                            Log.d("SignUpActivity", "User data saved successfully")
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Log.d("SignUpActivity", "Error saving user data: $e")
+                                        }
+                                }
+                            }
+                    }
                     val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                     mAuth.signInWithCredential(credential)
                         .addOnCompleteListener(this) { task ->
                             if (task.isSuccessful) {
-                                // Successfully signed in with Google
-                                val user = mAuth.currentUser
+                                // Successfully signed in with
+                                val user = mAuth.currentUser!!
+
                                 Toast.makeText(this, "Welcome, ${user?.email}", Toast.LENGTH_SHORT).show()
 
                                 // Navigate to Dashboard

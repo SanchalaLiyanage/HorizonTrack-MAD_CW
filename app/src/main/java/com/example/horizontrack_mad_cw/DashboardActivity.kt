@@ -2,12 +2,14 @@ package com.example.horizontrack_mad_cw
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
@@ -17,7 +19,11 @@ class DashboardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dashboard)  // Ensure this matches your layout file
 
         mAuth = FirebaseAuth.getInstance()
-        if (mAuth.currentUser == null) {
+        val db = FirebaseFirestore.getInstance()
+        val currentUser = mAuth.currentUser
+
+
+        if (currentUser == null) {
             // User is not signed in
             startActivity(Intent(this, SignInActivity::class.java))
             finish()
@@ -30,12 +36,23 @@ class DashboardActivity : AppCompatActivity() {
             onBackPressed() // Go back to the previous page
         }
 
-        // Get the user's name from Intent or SharedPreferences
-        val userName = mAuth.currentUser!!.displayName
-
         // Set welcome message
         val welcomeTextView: TextView = findViewById(R.id.welcomeTextView)
-        welcomeTextView.text = "Hello $userName!"
+
+        //get userdata from firestore
+        db.collection("user").document(currentUser.uid)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val name = document.getString("name")
+                    welcomeTextView.text = "Hello, ${name}"
+                } else {
+                    welcomeTextView.text = "Hello!"
+                }
+            }
+            .addOnFailureListener { exception ->
+                welcomeTextView.text = "Welcome!"
+            }
 
         // Setup click listeners for categories
         val fitnessCard: CardView = findViewById(R.id.fitnessCard)

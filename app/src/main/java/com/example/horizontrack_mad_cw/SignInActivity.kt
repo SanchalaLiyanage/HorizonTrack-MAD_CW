@@ -2,16 +2,21 @@ package com.example.horizontrack_mad_cw
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.horizontrack_mad_cw.models.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 
 class SignInActivity : AppCompatActivity() {
 
@@ -112,11 +117,38 @@ class SignInActivity : AppCompatActivity() {
     // Firebase authentication with Google
     private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        val db = Firebase.firestore
+
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign-in success, navigate to Dashboard
-                    val user: FirebaseUser? = firebaseAuth.currentUser
+                    val user = firebaseAuth.currentUser!!
+                    val name = user.displayName
+                    val email = user.email
+
+                    //check if alredy in fire store else add
+                    db.collection("user").document(user!!.uid)
+                        .get()
+                        .addOnSuccessListener { document ->
+                            if (!document.exists()) {
+                                if (name != null && email != null) {
+                                    val newUserWithData: User = User(name, email)
+                                    db.collection("user").document(user.uid)
+                                        .set(newUserWithData)
+                                        .addOnSuccessListener {
+                                            Log.d("SignUpActivity", "User data saved successfully")
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Log.d("SignUpActivity", "Error saving user data: $e")
+                                        }
+                                }
+                            }
+                        }
+                        .addOnFailureListener { exception ->
+                            Toast.makeText(this, "Error getting documents: $exception", Toast.LENGTH_SHORT).show()
+                        }
+
                     Toast.makeText(this, "Welcome, ${user?.email}", Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(this, DashboardActivity::class.java)
