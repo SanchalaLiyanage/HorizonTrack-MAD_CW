@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.horizontrack_mad_cw"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.horizontrack_mad_cw"
