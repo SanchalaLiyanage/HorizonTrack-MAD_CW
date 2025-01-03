@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "182422023213",
+    "project_id": "horizontrack-mad-cw",
+    "storage_bucket": "horizontrack-mad-cw.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182422023213:android:4b788dacece11aea065ca4",
+        "android_client_info": {
+          "package_name": "com.example.horizontrack_mad_cw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182422023213-qk47k8evn3ddp24olfoo7t3hktgjn57h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARWzckyJ-ysQt59LzZwyECbfmdFwv8YYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182422023213-qk47k8evn3ddp24olfoo7t3hktgjn57h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
