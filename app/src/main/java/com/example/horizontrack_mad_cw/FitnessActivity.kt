@@ -23,6 +23,8 @@ import androidx.core.content.ContextCompat
 import com.example.horizontrack_mad_cw.databinding.ActivityTrackerBinding
 import com.example.horizontrack_mad_cw.model.LocationModel
 import com.example.horizontrack_mad_cw.model.SummaryModel
+import com.google.firebase.FirebaseApp
+import com.google.firebase.firestore.FirebaseFirestore
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapListener
@@ -76,8 +78,8 @@ class FitnessActivity : AppCompatActivity(), MapListener {
                     firstTime = false
                 }
                 val random = Random()
-                val randomLatitudeChange = (random.nextDouble() * 0.0001 - 0.00005)
-                val randomLongitudeChange = (random.nextDouble() * 0.0001 - 0.00005)
+                val randomLatitudeChange = (random.nextDouble() * 0.0005 - 0.00025)
+                val randomLongitudeChange = (random.nextDouble() * 0.0005 - 0.00025)
                 mockLatitude += randomLatitudeChange
                 mockLongitude += randomLongitudeChange
                 val location = GeoPoint(mockLatitude, mockLongitude)
@@ -172,6 +174,8 @@ class FitnessActivity : AppCompatActivity(), MapListener {
             }
         }
 
+        FirebaseApp.initializeApp(this)
+
     }
 
     private fun saveSummary() {
@@ -181,7 +185,36 @@ class FitnessActivity : AppCompatActivity(), MapListener {
             Toast.LENGTH_SHORT
         ).show()
 
+        val db = FirebaseFirestore.getInstance()
+        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
+        // Convert SummaryModel to a map or use a Data Class
+        val summaryData = hashMapOf(
+            "deviceId" to deviceId,
+            "id" to SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.getDefault()).format(Date()),
+            "locations" to summaryModel.getLocations().map { it.toMap() },
+            "speeds" to summaryModel.getSpeeds(),
+            "totalCalorie" to summaryModel.getTotalCalorie(),
+            "totalDistMeters" to summaryModel.getTotalDistMeters()
+        )
+
+        db.collection("summaries")
+            .add(summaryData)
+            .addOnSuccessListener {
+                Toast.makeText(
+                    this@FitnessActivity,
+                    "Summary Saved Successfully",
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(
+                    this@FitnessActivity,
+                    "Failed to Save Summary: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
 
     }
 

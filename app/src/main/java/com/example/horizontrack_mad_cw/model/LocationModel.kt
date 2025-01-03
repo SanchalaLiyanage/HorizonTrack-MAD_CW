@@ -8,4 +8,14 @@ data class LocationModel(
     var imageb64: String?,
     var latitude: Double,
     var longitude: Double
-)
+) {
+    fun toMap(): Map<String, Any?> {
+        return mapOf(
+            "time" to time.toString(),
+            "note" to note,
+            "imageb64" to imageb64,
+            "latitude" to latitude,
+            "longitude" to longitude
+        )
+    }
+}
