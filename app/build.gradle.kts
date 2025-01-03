@@ -2,7 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+
     id("kotlin-parcelize")
+
 }
 
 android {
@@ -62,6 +64,12 @@ dependencies {
 
     // Kotlin standard library
     implementation (libs.kotlin.stdlib)
+    
+        implementation ("com.google.firebase:firebase-firestore-ktx:25.1.1")
+        implementation ("com.google.firebase:firebase-storage-ktx:21.0.1")
+
+
+
 
 
 

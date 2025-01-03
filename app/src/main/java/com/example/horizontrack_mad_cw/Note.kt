@@ -5,7 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Note(
+    var id: String = "",
     val title: String,
     val content: String,
-    val imageUri: String?
+    val imageUri: String? = null
 ) : Parcelable

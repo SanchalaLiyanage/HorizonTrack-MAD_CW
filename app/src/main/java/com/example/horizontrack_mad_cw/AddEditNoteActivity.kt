@@ -11,6 +11,9 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import java.util.UUID
 
 class AddEditNoteActivity : AppCompatActivity() {
     private lateinit var titleEditText: EditText
@@ -20,6 +23,8 @@ class AddEditNoteActivity : AppCompatActivity() {
     private var isEdit = false
     private var position: Int = -1
     private lateinit var imagePickerLauncher: ActivityResultLauncher<Intent>
+    private val db = FirebaseFirestore.getInstance()
+    private val storage = FirebaseStorage.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +34,6 @@ class AddEditNoteActivity : AppCompatActivity() {
         contentEditText = findViewById(R.id.contentEditText)
         imageView = findViewById(R.id.imageView)
 
-        // Use the updated method to retrieve Parcelable
         val note: Note? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra("note", Note::class.java)
         } else {
@@ -77,12 +81,38 @@ class AddEditNoteActivity : AppCompatActivity() {
             return
         }
 
-        val resultIntent = Intent().apply {
-            putExtra("note", Note(title, content, imageUri?.toString()))
-            if (isEdit) putExtra("position", position)
+        if (imageUri != null) {
+            val imageRef = storage.reference.child("images/${UUID.randomUUID()}.jpg")
+            val uploadTask = imageRef.putFile(imageUri!!)
+
+            uploadTask.addOnSuccessListener {
+                imageRef.downloadUrl.addOnSuccessListener { uri ->
+                    saveNoteToFirestore(title, content, uri.toString())
+                }
+            }.addOnFailureListener {
+                Toast.makeText(this, "Image upload failed", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            saveNoteToFirestore(title, content, null)
         }
-        setResult(RESULT_OK, resultIntent)
-        finish()
+    }
+
+    private fun saveNoteToFirestore(title: String, content: String, imageUrl: String?) {
+        val note = hashMapOf(
+            "title" to title,
+            "content" to content,
+            "imageUri" to imageUrl
+        )
+
+        db.collection("notes")
+            .add(note)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error saving note: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun deleteNote() {
