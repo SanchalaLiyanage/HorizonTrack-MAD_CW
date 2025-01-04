@@ -70,6 +70,12 @@ class AddEditNoteActivity : AppCompatActivity() {
             }
 
         imageView.setOnClickListener { selectImage() }
+
+        // Back button logic
+        val backIcon = findViewById<ImageView>(R.id.backIcon)
+        backIcon.setOnClickListener {
+            finish() // Close the current activity
+        }
     }
 
     private fun saveOrUpdateNote() {
