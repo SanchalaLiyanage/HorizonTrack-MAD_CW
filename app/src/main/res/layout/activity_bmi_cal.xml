@@ -40,25 +40,25 @@
             android:orientation="horizontal"
             android:layout_marginTop="16dp"
             android:paddingBottom="35dp"
-            android:layout_gravity="center_horizontal">
+            android:gravity="center_horizontal">
 
             <!-- Male Card -->
             <LinearLayout
                 android:id="@+id/llMaleCard"
-                android:layout_width="141dp"
-                android:layout_height="178dp"
-                android:layout_marginEnd="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:background="#607D8B"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="8dp"
-                android:layout_marginLeft="100dp">
+                android:padding="8dp">
 
                 <ImageView
                     android:id="@+id/ivMaleIcon"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/male_btn" />
+                    android:src="@drawable/male_btn"
+                    android:contentDescription="Male icon" />
 
                 <TextView
                     android:id="@+id/tvMaleText"
@@ -67,16 +67,16 @@
                     android:layout_marginTop="8dp"
                     android:text="Male"
                     android:textColor="#FFFFFF"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <!-- Female Card -->
             <LinearLayout
                 android:id="@+id/llFemaleCard"
-                android:layout_width="142dp"
-                android:layout_height="177dp"
-                android:layout_marginStart="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:background="#195395"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -86,6 +86,7 @@
                     android:id="@+id/ivFemaleIcon"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
+                    android:contentDescription="Female icon"
                     android:src="@drawable/female_btn" />
 
                 <TextView
@@ -95,10 +96,11 @@
                     android:layout_marginTop="8dp"
                     android:text="Female"
                     android:textColor="#FFFFFF"
-                    android:textSize="20dp"
-                    android:textStyle="bold"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
+
 
         <!-- Input Section -->
         <LinearLayout

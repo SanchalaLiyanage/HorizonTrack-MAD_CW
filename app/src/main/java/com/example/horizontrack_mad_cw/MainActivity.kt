@@ -1,20 +1,40 @@
 package com.example.horizontrack_mad_cw
 
+
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_bmi_cal)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.BMI)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setContentView(R.layout.activity_main)
+
+        // Initialize buttons
+        val btnBMICal = findViewById<Button>(R.id.btnBMICal)
+        val btnSecond = findViewById<Button>(R.id.btnSecond)
+        val btnThird = findViewById<Button>(R.id.btnThird)
+        val btnFourth = findViewById<Button>(R.id.btnFourth)
+
+        // Button actions
+        btnBMICal.setOnClickListener {
+            // Navigate to BMICalActivity
+            val intent = Intent(this, BMIcalActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnSecond.setOnClickListener {
+            // Add logic for second button
+        }
+
+        btnThird.setOnClickListener {
+            // Add logic for third button
+        }
+
+        btnFourth.setOnClickListener {
+            // Add logic for fourth button
         }
     }
 }
