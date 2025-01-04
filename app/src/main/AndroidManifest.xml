@@ -21,6 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- BMI Calculator Activity -->
+        <activity android:name=".BMIcalActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E0E0E0"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/dashboard"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Recommendations Text -->
+        <TextView
+            android:id="@+id/tvRecommendations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recommendations for You.."
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="30dp" />
+
+        <!-- Categories Row -->
+        <LinearLayout
+            android:id="@+id/categoriesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:padding="30dp">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_category" />
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_category" />
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_category" />
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_category" />
+        </LinearLayout>
+
+        <!-- Diet Plans Title -->
+        <TextView
+            android:id="@+id/tvDietPlans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diet Plans"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp" />
+
+        <!-- Diet Plan 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_background"
+            android:padding="16dp"
+            android:backgroundTint="@color/Teal">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/diet3"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+               >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Diet Plan 1"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="For 1st week"
+                    android:textSize="16sp"
+                    android:paddingTop="15dp"
+                    android:textColor="@color/white"
+
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Diet Plan 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_background"
+            android:padding="16dp"
+            android:backgroundTint="@color/purple">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/diet2jpeg"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Diet Plan 2"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="For 2nd week"
+                    android:textSize="16sp"
+                    android:paddingTop="15dp"
+                    android:textColor="@color/white"
+                     />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Diet Plan 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_background"
+            android:padding="16dp"
+            android:backgroundTint="@color/green">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/diet1"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Diet Plan 3"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="For 3rd week"
+                    android:textSize="16sp"
+                    android:paddingTop="15dp"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
