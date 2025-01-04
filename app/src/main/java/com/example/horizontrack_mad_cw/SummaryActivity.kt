@@ -2,18 +2,22 @@ package com.example.horizontrack_mad_cw
 
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.horizontrack_mad_cw.model.LocationModel
 import com.example.horizontrack_mad_cw.model.SummaryModel
@@ -88,7 +92,8 @@ class SummaryFragment : Fragment() {
             Toast.LENGTH_SHORT
         ).show()
         val db = FirebaseFirestore.getInstance()
-        val deviceId = Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
+        val deviceId =
+            Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
 
         db.collection("summaries")
             .whereEqualTo("deviceId", deviceId)
@@ -181,6 +186,19 @@ class SummaryFragment : Fragment() {
                 }
                 mapView.overlays.add(marker)
             }
+            if (location.imageb64 != null) {
+                val geoPoint = GeoPoint(location.latitude, location.longitude)
+                val marker = Marker(mapView).apply {
+                    position = geoPoint
+                    title = "Image"
+                    snippet = "Click to view image"
+                }
+                marker.setOnMarkerClickListener { clickedMarker, mapView ->
+                    showImagePopup(location.imageb64!!)
+                    true
+                }
+                mapView.overlays.add(marker)
+            }
         }
 
         // Center map on the first location if available
@@ -189,5 +207,24 @@ class SummaryFragment : Fragment() {
             mapView.controller.setCenter(geoPoints.first())
         }
         mapView.invalidate()
+    }
+
+    private fun showImagePopup(imageBase64: String) {
+        // Decode the base64 string to a Bitmap
+        val decodedString = Base64.decode(imageBase64, Base64.DEFAULT)
+        val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+
+        // Create an ImageView to display the image
+        val imageView = ImageView(requireContext()).apply {
+            setImageBitmap(bitmap)
+            scaleType = ImageView.ScaleType.CENTER_CROP
+        }
+
+        // Create a dialog to show the image
+        AlertDialog.Builder(requireContext())
+            .setTitle("Location Image")
+            .setView(imageView)
+            .setPositiveButton("Close") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 }
