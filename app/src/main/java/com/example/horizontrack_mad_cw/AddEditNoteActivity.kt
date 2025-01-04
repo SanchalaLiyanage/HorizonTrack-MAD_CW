@@ -112,14 +112,26 @@ class AddEditNoteActivity : AppCompatActivity() {
 
         db.collection("notes")
             .add(note)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show()
+            .addOnSuccessListener { documentReference ->
+                val id = documentReference.id
+                val newNote = Note(
+                    id = id,
+                    title = title,
+                    content = content,
+                    imageUri = imageUrl
+                )
+                val resultIntent = Intent().apply {
+                    putExtra("note", newNote)
+                    putExtra("position", -1) // New note
+                }
+                setResult(RESULT_OK, resultIntent)
                 finish()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error saving note: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
 
     private fun deleteNote() {
         val resultIntent = Intent().apply {

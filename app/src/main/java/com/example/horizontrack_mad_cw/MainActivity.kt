@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-        // Load notes from Firestore
+
         loadNotesFromFirestore()
     }
 
@@ -82,14 +82,15 @@ class MainActivity : AppCompatActivity() {
 
                 note?.let {
                     if (position == -1) {
-                        addNoteToFirestore(it)
+                        addNoteToFirestore(it) // Use this function to handle addition
                     } else {
-                        updateNoteInFirestore(it, position)
+                        updateNoteInFirestore(it, position) // Update Firestore and the list
                     }
                 }
             }
         }
     }
+
 
     private fun loadNotesFromFirestore() {
         db.collection("notes")
@@ -120,13 +121,15 @@ class MainActivity : AppCompatActivity() {
             .add(noteData)
             .addOnSuccessListener { documentReference ->
                 note.id = documentReference.id
-                notesList.add(note)
-                adapter.notifyItemInserted(notesList.size - 1)
+                notesList.add(note) // Add the new note to the list
+                adapter.notifyItemInserted(notesList.size - 1) // Notify adapter about the new item
+                Toast.makeText(this, "Note added successfully", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error adding note: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
 
     private fun updateNoteInFirestore(note: Note, position: Int) {
         val noteData = hashMapOf(
