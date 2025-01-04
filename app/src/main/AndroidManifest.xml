@@ -23,6 +23,8 @@
         </activity>
         <!-- BMI Calculator Activity -->
         <activity android:name=".BMIcalActivity" />
+        <!-- Information Activity -->
+        <activity android:name=".InfoActivity" />
     </application>
 
 </manifest>

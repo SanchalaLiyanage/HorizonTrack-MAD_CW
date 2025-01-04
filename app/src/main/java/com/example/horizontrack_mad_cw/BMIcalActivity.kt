@@ -1,5 +1,6 @@
 package com.example.horizontrack_mad_cw
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -28,6 +29,7 @@ class BMIcalActivity : AppCompatActivity() {
         val llMaleCard = findViewById<LinearLayout>(R.id.llMaleCard)
         val llFemaleCard = findViewById<LinearLayout>(R.id.llFemaleCard)
         val btnCalculate = findViewById<Button>(R.id.btnCalculate1)
+        val btnRecommendations = findViewById<Button>(R.id.btnRecommendations1)
         val btnReset = findViewById<Button>(R.id.btnReset)
         tvBMIDetails = findViewById(R.id.tvBMIDetails1)
         etHeight = findViewById(R.id.etHeight)
@@ -56,6 +58,25 @@ class BMIcalActivity : AppCompatActivity() {
         btnReset.setOnClickListener {
             resetFields()
         }
+        btnRecommendations.setOnClickListener {
+            val intent = Intent(this, InfoActivity::class.java)
+
+            // Get text from EditText fields
+            val age = etAge.text.toString()
+            val gender = gender // Assuming gender is already assigned from some source
+            val height = etHeight.text.toString()
+            val weight = etWeight.text.toString()
+
+            // Pass data as extras
+            intent.putExtra("age", age)
+            intent.putExtra("gender", gender)
+            intent.putExtra("height", height)
+            intent.putExtra("weight", weight)
+
+            // Start the next activity
+            startActivity(intent)
+        }
+
 
         // Load current user details
         loadUserDetails()

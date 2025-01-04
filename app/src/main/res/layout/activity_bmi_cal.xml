@@ -229,10 +229,10 @@
             android:id="@+id/btnRecommendations1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Recommendations →"
             android:background="#002D62"
-            android:textColor="#FFFFFF"
-            android:padding="12dp" />
+            android:padding="12dp"
+            android:text="Recommendations →"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 </ScrollView>
