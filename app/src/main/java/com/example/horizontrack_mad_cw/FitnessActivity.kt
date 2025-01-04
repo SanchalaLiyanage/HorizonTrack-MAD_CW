@@ -14,10 +14,14 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.horizontrack_mad_cw.databinding.ActivityTrackerBinding
@@ -60,6 +64,7 @@ class FitnessActivity : AppCompatActivity(), MapListener {
     private var startTime: Long = 0L
     private var isRunning: Boolean = true
     private lateinit var pauseButton: Button
+    private lateinit var noteButton: AppCompatImageView
 
     private val locationHandler = Handler(Looper.getMainLooper())
     private val locationUpdateRunnable = object : Runnable {
@@ -93,7 +98,7 @@ class FitnessActivity : AppCompatActivity(), MapListener {
                         "Location updated at: $updatedTime",
                         Toast.LENGTH_SHORT
                     ).show()
-                    initialized=true
+                    initialized = true
                 }
                 controller.setZoom(18.0)
                 controller.setCenter(location)
@@ -174,7 +179,34 @@ class FitnessActivity : AppCompatActivity(), MapListener {
             }
         }
 
+        noteButton = findViewById(R.id.journal)
+        noteButton.setOnClickListener {
+            val editText = EditText(this)
+            editText.layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+
+            val dialog = AlertDialog.Builder(this)
+                .setTitle("Enter your note")
+                .setView(editText)
+                .setPositiveButton("Save") { dialogInterface, i ->
+                    val noteText = editText.text.toString()
+                    summaryModel.getLocations().last().note = noteText;
+                    Toast.makeText(
+                        this@FitnessActivity,
+                        "Note Added : $noteText",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                .setNegativeButton("Cancel", null)
+                .create()
+
+            dialog.show()
+        }
+
         FirebaseApp.initializeApp(this)
+
 
     }
 

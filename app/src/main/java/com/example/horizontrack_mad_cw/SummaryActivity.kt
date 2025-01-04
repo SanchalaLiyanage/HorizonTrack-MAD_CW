@@ -26,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.osmdroid.config.Configuration
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
 
 class SummaryFragment : Fragment() {
@@ -164,6 +165,18 @@ class SummaryFragment : Fragment() {
         line.color = Color.RED
         line.width = 5f
         mapView.overlays.add(line)
+
+        locations.forEach { location ->
+            if (location.note != null) {
+                val geoPoint = GeoPoint(location.latitude, location.longitude)
+                val marker = Marker(mapView).apply {
+                    position = geoPoint
+                    title = "Note"
+                    snippet = location.note
+                }
+                mapView.overlays.add(marker)
+            }
+        }
 
         // Center map on the first location if available
         if (geoPoints.isNotEmpty()) {
