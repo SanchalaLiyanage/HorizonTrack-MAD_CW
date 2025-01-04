@@ -16,27 +16,24 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard)  // Ensure this matches your layout file
+        setContentView(R.layout.activity_dashboard)
 
         mAuth = FirebaseAuth.getInstance()
         val db = FirebaseFirestore.getInstance()
         val currentUser = mAuth.currentUser
 
-
+        // check whether User is signed in or not
         if (currentUser == null) {
-            // User is not signed in
             startActivity(Intent(this, SignInActivity::class.java))
             finish()
             return
         }
 
-        // Back Button functionality
-        val backIcon: ImageView = findViewById(R.id.backIcon) // Use findViewById directly for activities
+        val backIcon: ImageView = findViewById(R.id.backIcon)
         backIcon.setOnClickListener {
-            onBackPressed() // Go back to the previous page
+            onBackPressed()
         }
 
-        // Set welcome message
         val welcomeTextView: TextView = findViewById(R.id.welcomeTextView)
 
         //get userdata from firestore
@@ -61,24 +58,24 @@ class DashboardActivity : AppCompatActivity() {
 
         fitnessCard.setOnClickListener {
             Toast.makeText(this, "Fitness selected", Toast.LENGTH_SHORT).show()
-            // Navigate to FitnessActivity
+
             startActivity(Intent(this, FitnessActivity::class.java))
         }
 
         diaryCard.setOnClickListener {
             Toast.makeText(this, "Diary selected", Toast.LENGTH_SHORT).show()
-            // Navigate to DiaryActivity
+
             startActivity(Intent(this, DiaryActivity::class.java))
         }
 
         dietPlanCard.setOnClickListener {
             Toast.makeText(this, "Diet Plan selected", Toast.LENGTH_SHORT).show()
-            // Navigate to DietPlanActivity
+
             startActivity(Intent(this, DietPlanActivity::class.java))
         }
     }
 
     override fun onBackPressed() {
-        super.onBackPressed() // Navigate to the previous screen
+        super.onBackPressed()
     }
 }

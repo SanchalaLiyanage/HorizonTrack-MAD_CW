@@ -12,7 +12,7 @@
         android:theme="@style/Theme.HorizonTrackMAD_CW"
         tools:targetApi="31">
 
-        <!-- LandingPageActivity as the launcher activity -->
+
         <activity
             android:name="com.example.horizontrack_mad_cw.LandingPageActivity"
             android:exported="true">
@@ -22,18 +22,18 @@
             </intent-filter>
         </activity>
 
-        <!-- SignUpActivity Declaration -->
+
         <activity
             android:name="com.example.horizontrack_mad_cw.SignUpActivity"
             android:exported="true"
             />
 
-        <!-- SignInActivity Declaration -->
+
         <activity
             android:name="com.example.horizontrack_mad_cw.SignInActivity"
             android:exported="true" />
 
-        <!-- DashboardActivity Declaration -->
+
         <activity
             android:name="com.example.horizontrack_mad_cw.DashboardActivity"
             android:exported="true" />

@@ -1,5 +1,4 @@
-package com.example.horizontrack_mad_cw// Replace with your actual package name
-
+package com.example.horizontrack_mad_cw
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -20,16 +19,16 @@ class LandingPageActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        // Back Button functionality
+
         val backIcon: ImageView = findViewById(R.id.backIcon)
         backIcon.setOnClickListener {
-            onBackPressed() // Navigate back to the previous page
+            onBackPressed()
         }
 
-        // Get Started Button functionality
+
         val getStartedButton: Button = findViewById(R.id.btn_started)
         getStartedButton.setOnClickListener {
-            // Navigate to SignUpActivity
+
 
             if (mAuth.currentUser != null) {
                 val intent = Intent(this, DashboardActivity::class.java)

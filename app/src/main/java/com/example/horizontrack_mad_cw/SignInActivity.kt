@@ -27,36 +27,34 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
-        // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance()
 
-        // Back Button functionality
-        val backIcon: ImageView = findViewById(R.id.backIcon) // Ensure this ID matches the one in your XML
+        val backIcon: ImageView = findViewById(R.id.backIcon)
         backIcon.setOnClickListener {
-            onBackPressed() // Go back to the previous page
+            onBackPressed()
         }
 
-        // Initialize views
+
         val emailField: EditText = findViewById(R.id.email)
         val passwordField: EditText = findViewById(R.id.password)
         val btnSignIn: Button = findViewById(R.id.btn_sign_in)
         val btnSignInGoogle: LinearLayout = findViewById(R.id.btn_sign_in_google)
         val tvSignUp: TextView = findViewById(R.id.tv_sign_up)
 
-        // Configure Google Sign-In
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id)) // Replace with your Web Client ID
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        // Handle Google Sign-In button click
+
         btnSignInGoogle.setOnClickListener {
             val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, 1001) // Request code for Google Sign-In
+            startActivityForResult(signInIntent, 1001)
         }
 
-        // Handle EMAIL/PASSWORD SIGN IN button click
+
         btnSignIn.setOnClickListener {
             val email = emailField.text.toString()
             val password = passwordField.text.toString()
@@ -68,20 +66,18 @@ class SignInActivity : AppCompatActivity() {
             }
         }
 
-        // Handle SIGN UP link click (Navigate to Sign Up Activity)
+
         tvSignUp.setOnClickListener {
-            // Start SignUpActivity
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
     }
 
-    // Sign in with email and password
     private fun signInWithEmailPassword(email: String, password: String) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign-in success, navigate to Dashboard
+
                     val user: FirebaseUser? = firebaseAuth.currentUser
                     Toast.makeText(this, "Welcome, ${user?.email}", Toast.LENGTH_SHORT).show()
 
@@ -89,23 +85,21 @@ class SignInActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    // If sign in fails, display a message to the user
                     Toast.makeText(this, "Authentication failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
-    // Handle the result of the Google Sign-In Intent
+    // Handle continue with google
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 1001) { // Match request code
+        if (requestCode == 1001) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
 
                 if (account != null) {
-                    // Successfully signed in with Google, authenticate with Firebase
                     firebaseAuthWithGoogle(account)
                 }
             } catch (e: ApiException) {
@@ -127,7 +121,7 @@ class SignInActivity : AppCompatActivity() {
                     val name = user.displayName
                     val email = user.email
 
-                    //check if alredy in fire store else add
+                    //check if alredy in fire store ,  else add
                     db.collection("user").document(user!!.uid)
                         .get()
                         .addOnSuccessListener { document ->
@@ -155,7 +149,7 @@ class SignInActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    // If sign-in with Google fails
+
                     Toast.makeText(this, "Google Authentication failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
