@@ -58,7 +58,7 @@ class BMIcalActivity : AppCompatActivity() {
         }
 
         // Load current user details
-//        loadUserDetails()
+        loadUserDetails()
     }
 
     private fun calculateBMI() {
@@ -68,6 +68,10 @@ class BMIcalActivity : AppCompatActivity() {
 
         if (TextUtils.isEmpty(heightStr) || TextUtils.isEmpty(weightStr) || TextUtils.isEmpty(ageStr) || TextUtils.isEmpty(gender)) {
             Toast.makeText(this, "Please fill all fields and select gender", Toast.LENGTH_SHORT).show()
+            if(gender.isEmpty()){
+                Toast.makeText(this, "Please select Gender", Toast.LENGTH_SHORT).show()
+            return
+            }
             return
         }
 
@@ -91,6 +95,8 @@ class BMIcalActivity : AppCompatActivity() {
     }
 
     private fun saveToFirestore(gender: String, height: Float, weight: Float, age: Int, bmi: Float) {
+
+
 //        val userId = auth.currentUser?.uid ?: return
         val userId = "User123" // Hardcoded for testing
         val userBMI = UserBMI(gender, height, weight, age, bmi, userId)
@@ -108,14 +114,18 @@ class BMIcalActivity : AppCompatActivity() {
 
     private fun loadUserDetails() {
 //        val userId = auth.currentUser?.uid ?: return
+        Log.d("savefun", "save fun call")
 
         val userId = "User123" // Hardcoded for testing
-        firestore.collection("users")
+        firestore.collection("usersBMI")
             .document(userId)
             .get()
             .addOnSuccessListener { document ->
                 if (document != null) {
+
                     val userBMI = document.toObject(UserBMI::class.java)
+                    Log.d("savefun", "User BMI Details: $userBMI")
+
                     if (userBMI != null) {
                         etHeight.setText(userBMI.height.toString())
                         etWeight.setText(userBMI.weight.toString())
@@ -124,8 +134,10 @@ class BMIcalActivity : AppCompatActivity() {
                         gender = userBMI.gender
                         if (gender == "Male") {
                             findViewById<LinearLayout>(R.id.llMaleCard).setBackgroundResource(R.drawable.selected_background)
+                            findViewById<LinearLayout>(R.id.llFemaleCard).setBackgroundResource(R.drawable.default_background)
                         } else if (gender == "Female") {
-                            findViewById<LinearLayout>(R.id.llFemaleCard).setBackgroundResource(R.drawable.selected_background)
+                            findViewById<LinearLayout>(R.id.llFemaleCard).setBackgroundResource(R.drawable.selectedbacgroundfemale)
+                            findViewById<LinearLayout>(R.id.llMaleCard).setBackgroundResource(R.drawable.default_background)
                         }
                     }
                 }
