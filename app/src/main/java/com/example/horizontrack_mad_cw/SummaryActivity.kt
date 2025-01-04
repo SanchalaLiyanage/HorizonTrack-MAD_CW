@@ -50,12 +50,6 @@ class SummaryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         super.onCreate(savedInstanceState)
 
-        Toast.makeText(
-            activity,
-            "Summary Loading . . .",
-            Toast.LENGTH_SHORT
-        ).show()
-
         // Initialize views
         summaryDropdown = view.findViewById(R.id.summary_dropdown)
         totalCalories = view.findViewById(R.id.total_calories)
@@ -73,6 +67,12 @@ class SummaryFragment : Fragment() {
             view.context.startActivity(intent)
         }
 
+        val refreshBtn: Button =
+            view.findViewById(R.id.refresh)
+        refreshBtn.setOnClickListener {
+            fetchSummaries()
+        }
+
         // Configure OSMdroid
         Configuration.getInstance()
             .load(requireContext(), requireActivity().getSharedPreferences("osm", MODE_PRIVATE))
@@ -81,6 +81,11 @@ class SummaryFragment : Fragment() {
     }
 
     private fun fetchSummaries() {
+        Toast.makeText(
+            activity,
+            "Summary Loading . . .",
+            Toast.LENGTH_SHORT
+        ).show()
         val db = FirebaseFirestore.getInstance()
         val deviceId = Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
 

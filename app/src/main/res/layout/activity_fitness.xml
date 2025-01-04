@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:background="#740F1C6A"
         android:padding="8dp" />
 
     <!-- Summary Details -->
@@ -146,5 +147,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Start Tracker" />
+
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Refresh" />
     </LinearLayout>
 </LinearLayout>
