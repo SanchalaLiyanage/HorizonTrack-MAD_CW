@@ -96,6 +96,11 @@ class SummaryFragment : Fragment() {
             .addOnSuccessListener { result ->
                 val summaries = result.toObjects(SummaryModel::class.java)
                 setupDropdown(summaries)
+                Toast.makeText(
+                    activity,
+                    "Summary Loading Success",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(

@@ -12,6 +12,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.view.ViewGroup
@@ -41,11 +42,16 @@ import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.util.*
 
 class FitnessActivity : AppCompatActivity(), MapListener {
+
+    val REQUEST_CODE_CAMERA = 1001
+    val CAMERA_PERMISSION_REQUEST_CODE = 1003
+    private lateinit var currentImagePath: String
 
     lateinit var mMap: MapView
     lateinit var controller: IMapController
@@ -65,6 +71,7 @@ class FitnessActivity : AppCompatActivity(), MapListener {
     private var isRunning: Boolean = true
     private lateinit var pauseButton: Button
     private lateinit var noteButton: AppCompatImageView
+    private lateinit var cameraButton: AppCompatImageView
 
     private val locationHandler = Handler(Looper.getMainLooper())
     private val locationUpdateRunnable = object : Runnable {
@@ -192,7 +199,7 @@ class FitnessActivity : AppCompatActivity(), MapListener {
                 .setView(editText)
                 .setPositiveButton("Save") { dialogInterface, i ->
                     val noteText = editText.text.toString()
-                    summaryModel.getLocations().last().note = noteText;
+                    summaryModel.getLocations().last().note = noteText
                     Toast.makeText(
                         this@FitnessActivity,
                         "Note Added : $noteText",
@@ -205,9 +212,87 @@ class FitnessActivity : AppCompatActivity(), MapListener {
             dialog.show()
         }
 
+        cameraButton = findViewById(R.id.camera)
+        cameraButton.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.CAMERA
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                openCamera()
+            } else {
+                // Request camera permission
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.CAMERA),
+                    CAMERA_PERMISSION_REQUEST_CODE
+                )
+            }
+        }
+
         FirebaseApp.initializeApp(this)
 
 
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            CAMERA_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted, open camera
+                    openCamera()
+                } else {
+                    // Permission denied, show a message
+                    Toast.makeText(
+                        this,
+                        "Camera permission is required to take a photo",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            LOCATION_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    enableLocationFeatures()
+                } else {
+                    Log.e("TAG", "Location permission denied")
+                }
+            }
+        }
+    }
+
+    // Open the camera
+    private fun openCamera() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (cameraIntent.resolveActivity(packageManager) != null) {
+            startActivityForResult(cameraIntent, REQUEST_CODE_CAMERA)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK) {
+            data?.extras?.let {
+                val photo: Bitmap? = it.get("data") as Bitmap?
+                if (photo != null) {
+                    val base64String = convertImageToBase64(photo)
+                    println("Base64 Image: $base64String")
+                    summaryModel.getLocations().last().imageb64 = base64String
+                }
+            }
+        }
+    }
+
+    private fun convertImageToBase64(bitmap: Bitmap): String? {
+        var byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        var byteArray = byteArrayOutputStream.toByteArray()
+        return android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT)
     }
 
     private fun saveSummary() {
@@ -334,21 +419,6 @@ class FitnessActivity : AppCompatActivity(), MapListener {
     private fun addLocationToPolyline(location: GeoPoint) {
         polyline.addPoint(location)
         mMap.invalidate()
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                enableLocationFeatures()
-            } else {
-                Log.e("TAG", "Location permission denied")
-            }
-        }
     }
 
     override fun onScroll(event: ScrollEvent?): Boolean {
