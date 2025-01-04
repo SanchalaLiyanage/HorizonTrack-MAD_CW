@@ -1,25 +1,24 @@
 package com.example.horizontrack_mad_cw.model
 
-import com.google.type.DateTime
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.temporal.ChronoUnit
+import java.util.Date
+import java.util.Locale
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
-import kotlin.time.Duration
 
 class SummaryModel(
-    private var id: Int = 0,
+    private var id: String = SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.getDefault()).format(Date()),
     private var locations: MutableList<LocationModel> = mutableListOf(),
     private var speeds: MutableList<Double> = mutableListOf(),
     private var totalCalorie: Double = 0.0,
     private var totalDistMeters: Double = 0.0
 ) {
 
-    fun getId(): Int = id
+    fun getId(): String = id
     fun getLocations(): List<LocationModel> = locations
     fun getSpeeds(): List<Double> = speeds
     fun getTotalCalorie(): Double = totalCalorie
@@ -36,7 +35,7 @@ class SummaryModel(
             totalDistMeters += distance
 
             val timeDifferenceMillis = calculateTimeDifferenceInMilliSecs(
-                prevLocation.time, location.time
+                LocalDateTime.parse(prevLocation.time), LocalDateTime.parse(location.time)
             )
             // Calculate speed in meters per second (m/s)
             val speed = if (timeDifferenceMillis > 0) (distance / timeDifferenceMillis) * 1000 else 0.0
@@ -67,9 +66,13 @@ class SummaryModel(
         return radius * c
     }
 
-    private fun calculateTimeDifferenceInMilliSecs(startTime: LocalDateTime, endTime: LocalDateTime): Double {
+    private fun calculateTimeDifferenceInMilliSecs(startTime: LocalDateTime, endTime: LocalDateTime?): Double {
+        if (startTime == null || endTime == null) {
+            return 0.0 // Default to 0 if either time is null
+        }
         val duration = java.time.Duration.between(startTime, endTime)
         return duration.toMillis().toDouble()
     }
+
 
 }

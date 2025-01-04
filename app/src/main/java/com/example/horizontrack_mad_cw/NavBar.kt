@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class NavBar(private val context: Context) {
@@ -21,34 +22,22 @@ class NavBar(private val context: Context) {
         val bottomNavigationView: BottomNavigationView =
             activityContainerView.findViewById(R.id.btmNavBar)
 
-        loadLayout(R.layout.test)
-
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_dashboard -> {
-                    loadLayout(R.layout.test)
                     true
                 }
 
                 R.id.nav_activity -> {
-                    loadLayout(R.layout.activity_fitness)
-                    val trackBeginBtn: Button =
-                        activityContainerView.findViewById(R.id.track_begin_btn)
-                    trackBeginBtn.setOnClickListener {
-                        val intent =
-                            Intent(activityContainerView.context, FitnessActivity::class.java)
-                        activityContainerView.context.startActivity(intent)
-                    }
+                    loadLayout(SummaryFragment())
                     true
                 }
 
                 R.id.nav_stats -> {
-                    loadLayout(R.layout.test)
                     true
                 }
 
                 R.id.nav_profile -> {
-                    loadLayout(R.layout.test)
                     true
                 }
 
@@ -61,12 +50,11 @@ class NavBar(private val context: Context) {
 
     }
 
-    private fun loadLayout(layoutResId: Int) {
-        val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(layoutResId, null)
-        val frameLayout: FrameLayout? =
-            (context as? AppCompatActivity)?.findViewById(R.id.top_container)
-        frameLayout?.removeAllViews()
-        frameLayout?.addView(view)
+    private fun loadLayout(fragment: Fragment) {
+        if (context is AppCompatActivity) {
+            context.supportFragmentManager.beginTransaction()
+                .replace(R.id.top_container, fragment)
+                .commit()
+        }
     }
 }

@@ -100,7 +100,7 @@ class FitnessActivity : AppCompatActivity(), MapListener {
                 if (isRunning) {
                     summaryModel.addLocation(
                         LocationModel(
-                            LocalDateTime.now(),
+                            LocalDateTime.now().toString(),
                             null,
                             null,
                             location.latitude,
