@@ -38,6 +38,7 @@ class NavBar(private val context: Context) {
                 }
 
                 R.id.nav_profile -> {
+                    loadLayout(ProfileFragment())
                     true
                 }
 
