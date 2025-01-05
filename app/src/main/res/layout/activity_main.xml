@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- First Button -->
+    <Button
+        android:id="@+id/btnBMICal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BMI Cal"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Second Button -->
+    <Button
+        android:id="@+id/btnSecond"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Second Button"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Third Button -->
+    <Button
+        android:id="@+id/btnThird"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Third Button"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Fourth Button -->
+    <Button
+        android:id="@+id/btnFourth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fourth Button" />
+</LinearLayout>

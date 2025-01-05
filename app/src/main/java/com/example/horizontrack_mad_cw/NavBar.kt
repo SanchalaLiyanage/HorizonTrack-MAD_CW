@@ -22,9 +22,16 @@ class NavBar(private val context: Context) {
         val bottomNavigationView: BottomNavigationView =
             activityContainerView.findViewById(R.id.btmNavBar)
 
+        // Set the default selected item
+        bottomNavigationView.selectedItemId = R.id.nav_dashboard
+
+        // Load the default fragment
+        loadLayout(BMICalFragment())
+
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_dashboard -> {
+                    loadLayout(BMICalFragment())
                     true
                 }
 
