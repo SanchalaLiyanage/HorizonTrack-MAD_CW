@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/midnight_blue"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/cornflower_blue">
+    android:padding="16dp">
 
     <!-- Custom Toolbar with Back Button -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/midnight_blue"
+        android:orientation="horizontal"
         android:padding="8dp">
 
         <!-- Back Button -->
@@ -21,11 +20,11 @@
             android:id="@+id/backIcon"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:padding="14dp"
-            android:src="@drawable/back_button1"
-            android:contentDescription="Back"
             android:clickable="true"
-            android:focusable="true" />
+            android:contentDescription="Back"
+            android:focusable="true"
+            android:padding="14dp"
+            android:src="@drawable/back_button1" />
 
         <!-- Toolbar Title -->
         <TextView
@@ -46,10 +45,12 @@
         android:id="@+id/titleEditText"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:hint="Title"
         android:layout_marginTop="16dp"
-        android:padding="12dp"
         android:background="@android:drawable/editbox_background"
+        android:hint="Title"
+        android:padding="12dp"
+        android:text="Sample Title"
+        android:textColor="#0D0D0D"
         android:textSize="16sp" />
 
     <!-- Content Input Field -->
@@ -57,13 +58,15 @@
         android:id="@+id/contentEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Content"
         android:layout_marginTop="8dp"
-        android:padding="12dp"
         android:background="@android:drawable/editbox_background"
-        android:textSize="14sp"
+        android:gravity="top"
+        android:hint="Content"
         android:minHeight="100dp"
-        android:gravity="top" />
+        android:padding="12dp"
+        android:text="Sample Description"
+        android:textColor="#000000"
+        android:textSize="14sp" />
 
     <!-- Note Image Placeholder -->
     <ImageView
@@ -71,34 +74,34 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="16dp"
-        android:contentDescription="Note Image"
         android:background="@drawable/placeholder_image"
-        android:scaleType="centerCrop"
-        android:onClick="selectImage" />
+        android:contentDescription="Note Image"
+        android:onClick="selectImage"
+        android:scaleType="centerCrop" />
 
     <!-- Buttons (Delete and Save) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="16dp"
-        android:gravity="end">
+        android:gravity="end"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="Delete"
             android:layout_marginEnd="8dp"
             android:backgroundTint="@color/design_default_color_error"
+            android:text="Delete"
             android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/saveButton"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="Save"
             android:backgroundTint="@color/design_default_color_primary"
+            android:text="Save"
             android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>

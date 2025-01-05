@@ -58,7 +58,6 @@ class AddEditNoteActivity : AppCompatActivity() {
             setOnClickListener { saveOrUpdateNote() }
         }
 
-        findViewById<Button>(R.id.saveButton).visibility = View.INVISIBLE
 
         findViewById<Button>(R.id.deleteButton).apply {
             visibility = if (isEdit) Button.VISIBLE else Button.GONE
