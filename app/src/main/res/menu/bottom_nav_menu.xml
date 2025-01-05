@@ -3,7 +3,7 @@
     <item
         android:id="@+id/nav_dashboard"
         android:icon="@drawable/dashboard"
-        android:title="Dashboard"
+        android:title="Diet Plan"
         android:titleTextColor="#000000" />
 
     <item
