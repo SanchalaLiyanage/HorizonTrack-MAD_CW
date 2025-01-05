@@ -206,7 +206,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Calculate"
-            android:background="#03A9F4"
+            android:background="#05405C"
             android:textColor="#FFFFFF"
             android:padding="12dp"
             android:layout_marginBottom="16dp" />

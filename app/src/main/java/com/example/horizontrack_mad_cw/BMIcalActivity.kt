@@ -118,8 +118,8 @@ class BMIcalActivity : AppCompatActivity() {
     private fun saveToFirestore(gender: String, height: Float, weight: Float, age: Int, bmi: Float) {
 
 
-//        val userId = auth.currentUser?.uid ?: return
-        val userId = "User123" // Hardcoded for testing
+        val userId = auth.currentUser?.uid ?: return
+//        val userId = "User123"     // Hardcoded for testing
         val userBMI = UserBMI(gender, height, weight, age, bmi, userId)
 
         firestore.collection("usersBMI")

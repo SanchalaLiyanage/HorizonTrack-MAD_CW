@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permissions for Camera and Storage -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Declaring camera feature, required="false" allows the app to run on devices with or without a camera -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,19 +20,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HorizonTrackMAD_CW"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <!-- BMI Calculator Activity -->
         <activity android:name=".BMIcalActivity" />
+
         <!-- Information Activity -->
         <activity android:name=".InfoActivity" />
+
+        <activity android:name=".Profile1" />
+
     </application>
 
 </manifest>

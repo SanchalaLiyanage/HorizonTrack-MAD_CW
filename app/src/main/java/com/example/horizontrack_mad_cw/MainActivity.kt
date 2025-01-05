@@ -3,14 +3,8 @@ package com.example.horizontrack_mad_cw
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.horizontrack_mad_cw.models.Recommendation
-import com.example.horizontrack_mad_cw.models.saveDietPlansToFirestore
-import com.google.firebase.firestore.FirebaseFirestore
-import com.example.horizontrack_mad_cw.models.saveDietPlansToFirestore
-import com.example.horizontrack_mad_cw.models.uploadRecommendationsToFirestore
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         btnThird.setOnClickListener {
 //            saveDietPlansToFirestore()
+            val intent = Intent(this, Profile1::class.java)
+            startActivity(intent)
         }
 
         btnFourth.setOnClickListener {
