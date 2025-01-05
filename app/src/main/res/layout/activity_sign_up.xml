@@ -112,12 +112,15 @@
 
 
         <TextView
-            android:layout_marginTop="8dp"
+            android:id="@+id/tv_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Or Sign up with"
-            android:textColor="@color/gray"
-            android:gravity="center" />
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Have an account? SIGN IN"
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_marginTop="8dp"
@@ -148,19 +151,6 @@
                 android:textColor="@android:color/black"
                 />
         </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/tv_sign_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="8dp"
-            android:text="Have an account? SIGN IN"
-            android:textColor="@color/dark_blue"
-            android:textSize="14sp"
-            android:gravity="center" />
-
 
 
     </LinearLayout>

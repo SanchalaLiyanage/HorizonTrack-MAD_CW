@@ -46,6 +46,10 @@ class BMICalFragment : Fragment() {
         etWeight = view.findViewById(R.id.etWeight)
         etAge = view.findViewById(R.id.etAge)
 
+        gender = "Male"
+        llMaleCard.setBackgroundResource(R.drawable.selected_background)
+        llFemaleCard.setBackgroundResource(R.drawable.default_background)
+
         // Gender selection logic
         llMaleCard.setOnClickListener {
             gender = "Male"

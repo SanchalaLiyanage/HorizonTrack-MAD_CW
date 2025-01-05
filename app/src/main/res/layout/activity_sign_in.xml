@@ -84,13 +84,13 @@
             android:textColor="@color/white" />
 
         <TextView
+            android:id="@+id/tv_sign_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Or Sign in with"
-            android:textColor="@color/gray"
-            android:gravity="center" />
-
+            android:gravity="center"
+            android:text="Don’t have an account? SIGN UP"
+            android:textColor="@color/dark_blue" />
 
 
         <LinearLayout
@@ -123,15 +123,6 @@
                 />
         </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/tv_sign_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Don’t have an account? SIGN UP"
-            android:textColor="@color/dark_blue"
-            android:gravity="center" />
 
     </LinearLayout>
 </ScrollView>
