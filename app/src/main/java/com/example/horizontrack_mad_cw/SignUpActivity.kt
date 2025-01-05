@@ -3,6 +3,7 @@ package com.example.horizontrack_mad_cw
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.horizontrack_mad_cw.model.User
@@ -50,7 +51,7 @@ class SignUpActivity : AppCompatActivity() {
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gsoptions)
 
-
+        btnSignInGoogle.visibility = View.INVISIBLE
         btnSignInGoogle.setOnClickListener {
             val currentUser = mAuth.currentUser
             if (currentUser != null) {
