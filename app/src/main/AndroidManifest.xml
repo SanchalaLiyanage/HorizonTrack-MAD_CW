@@ -25,6 +25,8 @@
         <activity android:name=".BMIcalActivity" />
         <!-- Information Activity -->
         <activity android:name=".InfoActivity" />
+        <!-- Profile Activity -->
+        <activity android:name=".Profile1" />
     </application>
 
 </manifest>

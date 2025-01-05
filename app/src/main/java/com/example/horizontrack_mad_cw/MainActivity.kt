@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
 
         btnSecond.setOnClickListener {
 //            uploadRecommendationsToFirestore()
+            val intent = Intent(this, Profile1::class.java)
+            startActivity(intent)
         }
 
         btnThird.setOnClickListener {
