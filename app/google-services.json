@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "182422023213-iq65stnkld7c2fvf13k45nhusc0t1ig5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.horizontrack_mad_cw",
+            "certificate_hash": "690d02f28caee9f22276fc2e398f57c261571be6"
+          }
+        },
+        {
           "client_id": "182422023213-qk47k8evn3ddp24olfoo7t3hktgjn57h.apps.googleusercontent.com",
           "client_type": 3
         }

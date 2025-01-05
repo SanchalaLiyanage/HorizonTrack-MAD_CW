@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,25 +15,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HorizonTrackMAD_CW"
         tools:targetApi="31">
+
+
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.horizontrack_mad_cw.LandingPageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".SummaryActivity" android:exported="true" />
+        <activity android:name=".DashboardActivity" android:exported="true" />
         <activity
             android:name=".FitnessActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name="com.example.horizontrack_mad_cw.SignUpActivity"
+            android:exported="true"
+            />
+
+
+        <activity
+            android:name="com.example.horizontrack_mad_cw.SignInActivity"
+            android:exported="true" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.horizontrack_mad_cw.fileprovider"
             android:exported="false"
              android:grantUriPermissions="true">
+
         <meta-data
             android:name="android.support.FILE_PROVIDER_PATHS"
             android:resource="@xml/file_paths" />

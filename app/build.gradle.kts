@@ -48,11 +48,10 @@ dependencies {
     implementation(libs.androidx.coordinatorlayout)
     implementation(libs.osmdroid.android)
     implementation(libs.firebase.firestore)
+    implementation(libs.firebase.auth.ktx)
     implementation(libs.mpandroidchart)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-
-
+    implementation(libs.play.services.auth)
 }
