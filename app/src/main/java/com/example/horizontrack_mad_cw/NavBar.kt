@@ -34,6 +34,7 @@ class NavBar(private val context: Context) {
                 }
 
                 R.id.nav_stats -> {
+                    loadLayout(NoteFragment())
                     true
                 }
 

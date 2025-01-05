@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+
+    id("kotlin-parcelize")
+
 }
 
 android {
@@ -54,4 +57,23 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.play.services.auth)
+
+
+    // RecyclerView
+    implementation (libs.androidx.recyclerview)
+
+    // Image loading (optional but helpful for handling images efficiently)
+    implementation (libs.picasso)
+
+    // Kotlin standard library
+    implementation (libs.kotlin.stdlib)
+
+        implementation ("com.google.firebase:firebase-firestore-ktx:25.1.1")
+        implementation ("com.google.firebase:firebase-storage-ktx:21.0.1")
+
+
+
+
+
+
 }

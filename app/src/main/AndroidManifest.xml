@@ -22,6 +22,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -36,7 +37,7 @@
             android:exported="true"
             />
 
-
+        <activity android:name=".AddEditNoteActivity" />
         <activity
             android:name="com.example.horizontrack_mad_cw.SignInActivity"
             android:exported="true" />

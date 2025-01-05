@@ -16,7 +16,7 @@
         android:id="@+id/nav_stats"
         android:checkable="true"
         android:icon="@drawable/stats"
-        android:title="Stats"
+        android:title="Shared Notes"
         android:titleTextColor="#000000" />
 
     <item
